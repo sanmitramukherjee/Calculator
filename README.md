@@ -12,8 +12,8 @@
 
 ---
 
-### 🚀 About NeoCalc
-**NeoCalc** is a sleek, modern, and modular web-based calculator app built with pure **HTML**, **CSS**, and **JavaScript** — no frameworks, no build tools, just clean code.  
+### 🚀 About NotyourAvgCalc
+**NotyourAvgCalc** is a sleek, modern, and modular web-based calculator app built with pure **HTML**, **CSS**, and **JavaScript** — no frameworks, no build tools, just clean code.  
 It features multiple powerful calculator modes packed into one intuitive interface.
 
 ---
@@ -68,3 +68,9 @@ Calculator/
 └── /assets (optional for icons or sounds)
 └── README.md
 └── License
+
+---
+
+### 🚀 Check it out Live! 
+
+[NotyourAvgCalc][https://sanmitramukherjee.github.io/NotyourAvgCalc/]
