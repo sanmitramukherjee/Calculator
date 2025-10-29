@@ -1,5 +1,5 @@
 <h1 align="center">
-  🧮 NeoCalc  
+  🧮 NotYourAvgCalc  
 </h1>
 
 <p align="center">
