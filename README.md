@@ -73,4 +73,4 @@ Calculator/
 
 ### 🚀 Check it out Live! 
 
-[NotyourAvgCalc] [https://sanmitramukherjee.github.io/NotyourAvgCalc/]
+[NotyourAvgCalc](https://sanmitramukherjee.github.io/NotyourAvgCalc/)
