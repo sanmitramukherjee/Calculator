@@ -1,58 +1,50 @@
 export function render(container) {
   container.innerHTML = `
-    <div class="converter">
-      <h2>Unit Converter</h2>
-      <select id="type">
-        <option value="length">Length</option>
-        <option value="temperature">Temperature</option>
-      </select>
-      <input type="number" id="inputVal" placeholder="Value">
-      <select id="fromUnit"></select>
-      <span>→</span>
-      <select id="toUnit"></select>
-      <div id="result">Result: </div>
+    <div class="calc converter">
+      <div class="display">Unit Converter</div>
+      <div class="extra">
+        <select id="conv-type">
+          <option value="length">Length (m ↔ km)</option>
+          <option value="temp">Temperature (°C ↔ °F)</option>
+          <option value="weight">Weight (kg ↔ lb)</option>
+        </select>
+      </div>
+      <div class="extra">
+        <input type="number" id="input-val" placeholder="Enter value">
+        <select id="direction">
+          <option value="to">→</option>
+          <option value="from">←</option>
+        </select>
+        <button class="equal">Convert</button>
+      </div>
+      <div class="display" id="conv-result">Result: —</div>
     </div>
   `;
 
-  const typeSelect = container.querySelector("#type");
-  const fromUnit = container.querySelector("#fromUnit");
-  const toUnit = container.querySelector("#toUnit");
-  const inputVal = container.querySelector("#inputVal");
-  const result = container.querySelector("#result");
+  const type = container.querySelector("#conv-type");
+  const val = container.querySelector("#input-val");
+  const dir = container.querySelector("#direction");
+  const result = container.querySelector("#conv-result");
+  const btn = container.querySelector(".equal");
 
-  const units = {
-    length: ["m", "cm", "km", "in", "ft", "yd", "mi"],
-    temperature: ["C", "F", "K"],
-  };
+  btn.addEventListener("click", () => {
+    const num = parseFloat(val.value);
+    if (isNaN(num)) return (result.textContent = "Result: Invalid");
 
-  function populateUnits() {
-    const list = units[typeSelect.value];
-    fromUnit.innerHTML = list.map(u => `<option>${u}</option>`).join("");
-    toUnit.innerHTML = list.map(u => `<option>${u}</option>`).join("");
-  }
-
-  function convert() {
-    const val = parseFloat(inputVal.value);
-    if (isNaN(val)) return (result.textContent = "Result: —");
-    let res;
-
-    if (typeSelect.value === "length") {
-      const factor = { m: 1, cm: 0.01, km: 1000, in: 0.0254, ft: 0.3048, yd: 0.9144, mi: 1609.34 };
-      res = val * factor[fromUnit.value] / factor[toUnit.value];
-    } else if (typeSelect.value === "temperature") {
-      if (fromUnit.value === "C" && toUnit.value === "F") res = val * 9/5 + 32;
-      else if (fromUnit.value === "F" && toUnit.value === "C") res = (val - 32) * 5/9;
-      else if (fromUnit.value === "C" && toUnit.value === "K") res = val + 273.15;
-      else if (fromUnit.value === "K" && toUnit.value === "C") res = val - 273.15;
-      else res = val;
+    let output;
+    switch (type.value) {
+      case "length":
+        output = dir.value === "to" ? num / 1000 : num * 1000;
+        result.textContent = `Result: ${output.toFixed(3)} ${dir.value === "to" ? "km" : "m"}`;
+        break;
+      case "temp":
+        output = dir.value === "to" ? num * 9/5 + 32 : (num - 32) * 5/9;
+        result.textContent = `Result: ${output.toFixed(2)}°${dir.value === "to" ? "F" : "C"}`;
+        break;
+      case "weight":
+        output = dir.value === "to" ? num * 2.20462 : num / 2.20462;
+        result.textContent = `Result: ${output.toFixed(3)} ${dir.value === "to" ? "lb" : "kg"}`;
+        break;
     }
-
-    result.textContent = `Result: ${res}`;
-  }
-
-  populateUnits();
-  typeSelect.addEventListener("change", populateUnits);
-  inputVal.addEventListener("input", convert);
-  fromUnit.addEventListener("change", convert);
-  toUnit.addEventListener("change", convert);
+  });
 }

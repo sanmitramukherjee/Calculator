@@ -2,29 +2,44 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ultimate Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="style.css">
+  <title>NeoCalc</title>
 </head>
 <body>
-  <div class="app">
-    <aside class="sidebar">
-      <h2>Modes</h2>
-      <ul>
-        <li onclick="switchMode('standard')">Standard</li>
-        <li onclick="switchMode('scientific')">Scientific</li>
-        <li onclick="switchMode('programmer')">Programmer</li>
-        <li onclick="switchMode('graphing')">Graphing</li>
-        <li onclick="switchMode('dateCalc')">Date</li>
-        <li onclick="switchMode('converter')">Converter</li>
-      </ul>
-    </aside>
+  <canvas id="ambient"></canvas>
 
-    <main id="content-area" class="content">
-      <p>Select a mode to begin.</p>
-    </main>
+  <!-- Splash Screen -->
+  <div id="splash">
+    <div class="splash-content">
+      <h1>Not your Average Calc</h1>
+      <p>Initializing brilliance...</p>
+    </div>
   </div>
 
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar left">
+    <button class="nav-btn" data-mode="standard">Standard</button>
+    <button class="nav-btn" data-mode="scientific">Scientific</button>
+    <button class="nav-btn" data-mode="programmer">Programmer</button>
+  </aside>
+
+  <h2 id="calc-title"></h2>
+  <main id="calc-container"></main>
+
+  <aside class="sidebar right">
+    <button class="nav-btn" data-mode="dateCalc">Date</button>
+    <button class="nav-btn" data-mode="graphing">Graphing</button>
+    <button class="nav-btn" data-mode="converter">Converter</button>
+  </aside>
+
+<footer>
+  <div id="footer-center">Made by San</div>
+  <div id="streak"></div>
+</footer>
+
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script type="module" src="main.js"></script>
 </body>
+
 </html>
